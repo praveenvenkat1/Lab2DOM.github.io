@@ -186,7 +186,7 @@ function makeBees() {
         var num = i;
         var bee = new Bee(num); //create object and its IMG element
         bee.display(); //display the bee
-        bee.push(bee); //add the bee object to the bees array
+        bees.push(bee); //add the bee object to the bees array
         i++;
     }
 }
