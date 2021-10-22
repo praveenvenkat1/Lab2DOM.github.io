@@ -219,10 +219,10 @@ function isHit(defender, offender) {
         let thisDuration = newStingTime - lastStingTime;
         lastStingTime = newStingTime;
         let longestDuration = Number(duration.innerHTML);
-        
+
         if (longestDuration === 0) {
             longestDuration = thisDuration;
-        }
+        } 
         else {
             if (longestDuration < thisDuration) 
                 longestDuration = thisDuration;
