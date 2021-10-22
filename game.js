@@ -86,6 +86,7 @@ class Bee{
     constructor (beeNumber){
         //the HTML element corresponding to the IMG of the bee
         this.htmlElement=createBeeImg(beeNumber);
+
         //its HTML ID
         this.id=this.htmlElement.id;
 
@@ -118,14 +119,15 @@ class Bee{
             let t = parent.offsetTop;
             let w = parent.offsetWidth;
             let h = parent.offsetHeight;
+
             if (this.x < 0)
-            this.x = 0;
+                this.x = 0;
             if (this.x > w - iw)
-            this.x = w - iw;
+                this.x = w - iw;
             if (this.y < 0)
-            this.y = 0;
+                this.y = 0;
             if (this.y > h - ih)
-            this.y = h - ih;
+                this.y = h - ih;
             };
            
         
@@ -150,14 +152,17 @@ function createBeeImg(wNum)
     img.setAttribute("alt", "A bee!");
     img.setAttribute("id", "bee" + wNum);
     img.setAttribute("class", "bee"); //set class of html tag img
+    
     //add the IMG element to the DOM as a child of the board div
     img.style.position = "absolute";
     boardDiv.appendChild(img);
+
     //set initial position 
     let x = getRandomInt(boardDivW);
     let y = getRandomInt(boardDivH);
     img.style.left = (boardDivX + x) + "px";
     img.style.top = (y) + "px";
+
     //return the img object
     return img;
 }
@@ -181,7 +186,7 @@ function makeBees() {
         var num = i;
         var bee = new Bee(num); //create object and its IMG element
         bee.display(); //display the bee
-        bees.push(bee); //add the bee object to the bees array
+        bee.push(bee); //add the bee object to the bees array
         i++;
     }
 }
