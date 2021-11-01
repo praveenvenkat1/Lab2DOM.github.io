@@ -56,6 +56,7 @@ function start() {
     updateBees();
     //note the starting time
     lastStingTime= new Date();
+    longestDuration=0;
 }
 
 // Handle keyboard events 
@@ -132,10 +133,6 @@ class Bee{
             if (this.y > h - ih)
                 this.y = h - ih;
             };
-           
-        
-        
-
     }
 }
 
