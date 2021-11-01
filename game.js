@@ -7,12 +7,14 @@ function Bear() {
     this.y = this.htmlElement.offsetTop;
 
     this.move = function(xDir, yDir) {
+        this.fitBounds();         //we add this instruction to keep bear within board
         this.x += this.dBear * xDir;
         this.y += this.dBear * yDir;
         this.display();
     };
 
     this.display = function() {
+        this.fitBounds();    //keeps bear within board area 
         this.htmlElement.style.left = this.x + "px";
         this.htmlElement.style.top = this.y + "px";
         this.htmlElement.style.display = "block";
@@ -32,14 +34,8 @@ function Bear() {
         if (this.y > h - ih) this.y = h - ih;
     };
 
-    this.move = function(xDir, yDir) {
-        this.fitBounds();         //we add this instruction to keep bear within board
-        this.x += this.dBear * xDir;
-        this.y += this.dBear * yDir;
-        this.display();
-    };
-
     this.setSpeed = function(){
+        this.dBear = document.getElementById("speedBear").value;
     };
 }
 
@@ -48,12 +44,18 @@ function start() {
     bear = new Bear();
     // Add an event listener to the keypress event.
     document.addEventListener("keydown", moveBear, false);
+    // Add an event listener for inputting speed of the bear
+    document.getElementById("speedBear").addEventListener("change",setSpeed,false);
 
     //create new array for bees
     bees = new Array();
     //create bees
     makeBees();
 
+    //calls updateBees to move bees for the first time
+    updateBees();
+    //note the starting time
+    lastStingTime= new Date();
 }
 
 // Handle keyboard events 
@@ -194,6 +196,7 @@ function makeBees() {
 function moveBees() {
     //get speed input field value
     let speed = document.getElementById("speedBees").value;
+    
     //move each bee to a random location
     for (let i = 0; i < bees.length; i++) 
     {
@@ -207,8 +210,10 @@ function moveBees() {
 function updateBees() { // update loop for game
     //move the bees randomly
     moveBees();
+
     //use a fixed update period
     let period = 10;     //modify this to control refresh period
+    
     //update the timer for the next move
     updateTimer = setTimeout('updateBees()', period);
    }
