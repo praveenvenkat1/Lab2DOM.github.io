@@ -218,27 +218,35 @@ function updateBees() { // update loop for game
     let period = document.getElementById("periodTimer").value;     //TODO: user has control over refresh period
     
     //update the timer for the next move
-    if (hits.innerHTML>=1000){   //condition to check number of hits
-        alert("Game over!");   //alerts user if number of hits exceeds 1000
-    }
-    else{
-        updateTimer = setTimeout('updateBees()', period);    //changes position depending on hits count
-    }
+    updateTimer = setTimeout('updateBees()', period);    //changes position depending on hits count
+    var score = Number(document.getElementById('hits').innerText);
     
    }
    
+function GameOver(){
+    document.getElementById("hits").innerText = 0;
+    document.getElementById("speedBees").value=0;
+    alert("Game over!");
+}
 function isHit(defender, offender) {
     if (overlap(defender, offender)) { //check if the two images overlap
-        let score = hits.innerHTML;
+        let score = document.getElementById("hits").innerHTML;
+
         score = Number(score) + 1; //increment the score
+
+        if (score>=1000){
+            GameOver();
+        }
+
         hits.innerHTML = score; //display the new score
 
         if (check_movement==true){
-                 //calculate longest duration after bear moves
+            //calculate longest duration after bear moves
             let newStingTime = new Date();
             let thisDuration = newStingTime - lastStingTime;
             lastStingTime = newStingTime;
-            let longestDuration = Number(duration.innerHTML);
+
+            
 
             if (longestDuration === 0) {
                 longestDuration = thisDuration;
