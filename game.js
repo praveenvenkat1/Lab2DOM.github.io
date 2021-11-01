@@ -61,6 +61,7 @@ function start() {
 // Handle keyboard events 
 // to move the bear
 function moveBear(e) {
+    check_movement=true;
     //codes of the four keys
     const KEYUP = 38;
     const KEYDOWN = 40;
@@ -168,7 +169,12 @@ function createBeeImg(wNum)
     //return the img object
     return img;
 }
-   
+
+//TODO:
+function getRandomInt(max){    
+    randno=Math.floor(Math.random()*max);
+    return randno;
+}
 function makeBees() {
     //get number of bees specified by the user
     let nbBees = document.getElementById("nbBees").value;
@@ -212,32 +218,41 @@ function updateBees() { // update loop for game
     moveBees();
 
     //use a fixed update period
-    let period = 10;     //modify this to control refresh period
+    let period = document.getElementById("periodTimer").value;     //TODO: user has control over refresh period
     
     //update the timer for the next move
-    updateTimer = setTimeout('updateBees()', period);
+    if (hits.innerHTML>=1000){   //condition to check number of hits
+        alert("Game over!");   //alerts user if number of hits exceeds 1000
+    }
+    else{
+        updateTimer = setTimeout('updateBees()', period);    //changes position depending on hits count
+    }
+    
    }
    
 function isHit(defender, offender) {
-    if (overlap(defender, offender)) { //check if the two image overlap
+    if (overlap(defender, offender)) { //check if the two images overlap
         let score = hits.innerHTML;
         score = Number(score) + 1; //increment the score
         hits.innerHTML = score; //display the new score
 
-        //calculate longest duration
-        let newStingTime = new Date();
-        let thisDuration = newStingTime - lastStingTime;
-        lastStingTime = newStingTime;
-        let longestDuration = Number(duration.innerHTML);
+        if (check_movement==true){
+                 //calculate longest duration after bear moves
+            let newStingTime = new Date();
+            let thisDuration = newStingTime - lastStingTime;
+            lastStingTime = newStingTime;
+            let longestDuration = Number(duration.innerHTML);
 
-        if (longestDuration === 0) {
-            longestDuration = thisDuration;
-        } 
-        else {
-            if (longestDuration < thisDuration) 
+            if (longestDuration === 0) {
                 longestDuration = thisDuration;
+            } 
+            else {
+                if (longestDuration < thisDuration) 
+                    longestDuration = thisDuration;
+            }
+            document.getElementById("duration").innerHTML = longestDuration;   
         }
-        document.getElementById("duration").innerHTML = longestDuration;
+
 
     }
 }
@@ -269,4 +284,10 @@ function overlap(element1, element2) {
     }
     return true;
 }
+
+//TODO: implement restart function
+function restart(){
+    location.reload();
+}
+
    
