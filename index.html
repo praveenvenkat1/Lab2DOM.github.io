@@ -16,6 +16,7 @@
         var bees;
         //take start time
         lastStingTime= new Date();
+        var newStingtype;
         
     </script>
 
@@ -25,11 +26,11 @@
 
     <div id="title">
         <h1>Help the bear escape the bees !</h1>
-        <p>Bear tries to avoid being stung by <input type="text" id="nbBees" value="1" size="3"> bees by running and
+        <p>Bear tries to avoid being stung by <input type="text" id="nbBees" value="1" size="3" onchange="makeBees()"> bees by running and
             jumping. The objective is to have as less stings as possible!</p>
         <p>You can adjust bear's speed <input type="text" id="speedBear" value="100" size="3"> px/ms
         </p>
-        <p>You can adjust bees' speed <input type="text" id="speedBees" value="50" size="3" onchange="makeBees()"> px/ms
+        <p>You can adjust bees' speed <input type="text" id="speedBees" value="50" size="3" > px/ms
             <br> and the refresh period <input type="text" id="periodTimer" value="10" size="3" onchange="Bear.setSpeed()"> ms
         </p>
         <p>Additionally, you can restart the game by hitting this button: <button onclick="restart()">RESTART</button></p>
