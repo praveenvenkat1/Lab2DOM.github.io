@@ -174,6 +174,7 @@ function getRandomInt(max){
 }
 function makeBees() {
     //get number of bees specified by the user
+
     let nbBees = document.getElementById("nbBees").value;
     nbBees = Number(nbBees);
     //try converting the content of the input to a number
@@ -227,6 +228,7 @@ function GameOver(){
     document.getElementById("hits").innerText = 0;
     document.getElementById("speedBees").value=0;
     alert("Game over!");
+    restart();
 }
 function isHit(defender, offender) {
     if (overlap(defender, offender)) { //check if the two images overlap
