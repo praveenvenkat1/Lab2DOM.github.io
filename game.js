@@ -173,6 +173,10 @@ function getRandomInt(max){
     return randno;
 }
 function makeBees() {
+    while (bees.length>0){
+        bees(bees.length-1).htmlElement.remove();
+        bees.pop();
+    }
     //get number of bees specified by the user
 
     let nbBees = document.getElementById("nbBees").value;
