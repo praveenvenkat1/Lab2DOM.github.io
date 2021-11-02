@@ -175,7 +175,7 @@ function getRandomInt(max){
 function makeBees() {
     while (bees.length>0){
         bees(bees.length-1).htmlElement.remove();
-        bees.pop();
+        bees.pop(); 
     }
     //get number of bees specified by the user
 
